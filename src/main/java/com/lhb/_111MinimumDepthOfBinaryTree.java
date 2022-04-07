@@ -8,7 +8,7 @@ import java.util.Queue;
 /**
  * @program: LeetCodeRecord
  * @description: 111. 二叉树的最小深度
- * @see https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
+ * @link https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
  * @author: linhaibin
  * @create: 2021-02-19 17:43
  **/
