@@ -6,7 +6,7 @@ import com.lhb.common.ListNode;
  * @program: LeetCodeRecord
  * @description: 206. 反转链表（简单）
  * @author: linhaibin
- * @create: 2021-02-19 17:43
+ * @create: 2022-04-10 17:43
  **/
 public class _206ReverseLinkedList {
 
