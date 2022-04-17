@@ -5,9 +5,9 @@ import com.lhb.common.TreePrinter;
 
 /**
  * @program: LeetCodeRecord
- * @description: 105. 从前序与中序遍历序列构造⼆叉树（中等）
+ * @description: 889. 根据前序和后序遍历构造⼆叉树（中等）
  * @author: linhaibin
- * @create: 2022-04-15 23:03
+ * @create: 2022-04-16 23:03
  **/
 public class _889ConstructBinaryTreeFromPreorderAndPostorderTraversal {
     /**

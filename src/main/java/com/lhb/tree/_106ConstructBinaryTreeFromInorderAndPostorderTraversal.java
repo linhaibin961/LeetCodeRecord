@@ -7,9 +7,9 @@ import java.util.Stack;
 
 /**
  * @program: LeetCodeRecord
- * @description: 105. 从前序与中序遍历序列构造⼆叉树（中等）
+ * @description: 106. 从中序与后序遍历序列构造⼆叉树（中等）
  * @author: linhaibin
- * @create: 2022-04-15 23:03
+ * @create: 2022-04-16 23:03
  **/
 public class _106ConstructBinaryTreeFromInorderAndPostorderTraversal {
     /**
