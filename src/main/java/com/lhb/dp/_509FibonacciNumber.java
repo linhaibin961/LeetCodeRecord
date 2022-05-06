@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * @program: LeetCodeRecord
- * @description: 39. 组合总和（中等）
+ * @description: 509. 斐波那契数（简单）
  * @author: linhaibin
  * @create: 2022-04-21 01:03
  **/

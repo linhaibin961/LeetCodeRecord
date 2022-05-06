@@ -8,7 +8,7 @@ import java.util.Queue;
 
 /**
  * @program: LeetCodeRecord
- * @description: 39. 组合总和（中等）
+ * @description: 322. 零钱兑换（中等）
  * @author: linhaibin
  * @create: 2022-04-21 01:03
  **/

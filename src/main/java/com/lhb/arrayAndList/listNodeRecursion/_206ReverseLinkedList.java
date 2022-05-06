@@ -52,6 +52,15 @@ public class _206ReverseLinkedList {
         ListNode listNode = solution.reverseList2(list1);
         // 输出 [5,4,3,2,1]
         System.out.println(listNode);
+
+
+        int[] ints2 = new int[]{1, 2, 3, 4, 5};
+        ListNode list2 = getHeader(ints2);
+        Solution2 solution2 = new Solution2();
+        ListNode listNode2 = solution2.reverseList(list2);
+        // 输出 [5,4,3,2,1]
+        System.out.println(listNode2);
+        System.out.println(Solution2.lastNode);
     }
 
     private static ListNode getHeader(int[] ints) {
@@ -91,7 +100,7 @@ public class _206ReverseLinkedList {
          * @return
          */
         public ListNode reverseList2(ListNode head) {
-            if (head == null || head.next == null) {
+            if (head.next == null) {
                 return head;
             }
             // 以 head.next 为起点
@@ -126,5 +135,22 @@ public class _206ReverseLinkedList {
                       返回节点5
             出栈完成，最终头节点5->4->3->2->1
          */
+    }
+
+    static class Solution2 {
+        public static ListNode lastNode = new ListNode();
+
+        public ListNode reverseList(ListNode head) {
+            if (head.next == null) {
+                lastNode.next = head;
+                return head;
+            }
+            ListNode last = reverseList(head.next);
+//            head.next.next =head;
+            head.next = null;
+            last.next = head;
+
+            return head;
+        }
     }
 }

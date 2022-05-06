@@ -1,9 +1,5 @@
 package com.lhb;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * @program: LeetCodeRecord
  * @description:
@@ -38,6 +34,103 @@ import java.util.Set;
  */
 public class _5LongestPalindromicSubstring {
     // https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zui-chang-hui-wen-zi-chuan-by-leetcode-solution/
+
+    public static void main(String[] args) {
+        System.out.println(_5LongestPalindromicSubstring.longestPalindrome("babad"));
+        System.out.println(_5LongestPalindromicSubstring.longestPalindrome2("babad"));
+
+        Solution solution = new Solution();
+        System.out.println(solution.longestPalindrome("abba"));
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.longestPalindrome("abba"));
+    }
+
+    /**
+     * 自己写的动态规划
+     */
+    static class Solution {
+        public String longestPalindrome(String s) {
+            int n = s.length();
+            if (n < 2) {
+                return s;
+            }
+            boolean[][] dp = new boolean[n][n];
+            // 初始化：所有长度为 1 的子串都是回文串，实际可以不用初始化
+            for (int i = 0; i < n; i++) {
+                dp[i][i] = true;
+            }
+            int resStart = 0;
+            int resMaxLength = 0;
+            /*
+             * 一开始第一层循环我定义成左指针，第一层 for 循环我定义成右指针，没写出来
+             *
+             * 后面我把第一层定义成回文串的长度，第二层定义成左指针，
+             * dp 定义成：dp[len][leftIndex],意思为从索引 leftIndex 开始，长度为 len 的字符串是否为回文字符串
+             * 状态转移方程为：dp[len][leftIndex] = len % 2 == 1 ? dp[len - 1][leftIndex + 1] : dp[len - 2][leftIndex + 1] ;
+             * 如果 leftIndex -1 的字符等于 rightIndex 返回结果错误，会把 leftIndex -1统计进去。如 bbbgssbgso 会返回 bbgssbg，正确答案应该是 bgssbg
+             *
+             * 然后我又改了 dp[][]的定义：dp[leftIndex][rightIndex]
+             * 状态转移方程为：dp[leftIndex][rightIndex] = dp[leftIndex + 1][rightIndex - 1];就好了
+             */
+            for (int len = 2; len <= n; len++) {
+                for (int leftIndex = 0; leftIndex < n; leftIndex++) {
+                    int rightIndex = leftIndex + len - 1;
+                    if (rightIndex >= n) {
+                        break;
+                    }
+//                    String substring = s.substring(leftIndex, rightIndex + 1);
+                    if (s.charAt(rightIndex) != s.charAt(leftIndex)) {
+                        dp[leftIndex][rightIndex] = false;
+                    } else {
+                        if (len > 2) {
+                            dp[leftIndex][rightIndex] = dp[leftIndex + 1][rightIndex - 1];
+                        } else {
+                            dp[leftIndex][rightIndex] = true;
+                        }
+
+                    }
+                    if (dp[leftIndex][rightIndex] && len > resMaxLength) {
+                        resStart = leftIndex;
+                        resMaxLength = len;
+                    }
+                }
+            }
+
+            return s.substring(resStart, resStart + resMaxLength);
+        }
+    }
+
+    /**
+     * 自己写的中心扩展算法
+     */
+    static class Solution2 {
+        public String longestPalindrome(String s) {
+            if (s == null || s.length() < 1) {
+                return "";
+            }
+            int length = s.length();
+            int start = 0;
+            int end = 0;
+            for (int i = 0; i < length; i++) {
+                int edd = getMaxPalindromic(s, i, i + 1);
+                int odd = getMaxPalindromic(s, i - 1, i + 1);
+                int max = Math.max(edd, odd);
+                if (max > end - start) {
+                    start = i - (max - 1) / 2;
+                    end = i + max / 2;
+                }
+            }
+            return s.substring(start, end + 1);
+        }
+
+        private int getMaxPalindromic(String s, int left, int right) {
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
+            }
+            return right - left - 1;
+        }
+    }
 
     /**
      * 复杂度分析
@@ -114,8 +207,4 @@ public class _5LongestPalindromicSubstring {
         return right - left - 1;
     }
 
-    public static void main(String[] args) {
-        System.out.println(_5LongestPalindromicSubstring.longestPalindrome("babad"));
-        System.out.println(_5LongestPalindromicSubstring.longestPalindrome2("babad"));
-    }
 }

@@ -63,6 +63,7 @@ public class _3LongestSubstringWithoutRepeatingCharacters {
                 char c = s.charAt(right);
                 window.put(c, window.getOrDefault(c, 0) + 1);
                 while (window.get(c) > 1) {
+                    // 遇到重复的字符了，开始收缩窗口
                     char leftC = s.charAt(left);
                     window.put(leftC, window.get(leftC) - 1);
                     left++;
